@@ -1,0 +1,47 @@
+# ts-config
+
+Shared TypeScript compiler configuration for 2h2d repositories
+
+## Development
+
+```bash
+npm install
+npm run check
+npm test
+npm run build
+npm run pack:dry
+```
+
+## Packaging
+
+`.github/npm-package-files` is the authoritative package-content allowlist used by the local release
+command and both CI jobs. Update it whenever the intended published file set changes.
+
+## Release staging
+
+Repository setup:
+
+1. When `new` creates the GitHub repository, it automatically protects `main` and `v*` tags and
+   restricts `npm-publish` to `v*` tags without a deployment reviewer or administrator bypass.
+2. Configure npm trusted publishing for `2h2d-co/ts-config` using
+   `.github/workflows/publish.yml` and the `npm-publish` environment.
+3. Replace `.github/release-signers` if release commits use a different SSH signing key.
+
+If repository creation was skipped with `--no-github`, configure the branch, tag, and environment
+controls manually.
+
+Release flow:
+
+1. Run `npm run release -- X.Y.Z` from a clean, synchronized `main`.
+2. The release command builds the package from the staged Git index, records its SHA-256 in the
+   SSH-signed release commit, rebuilds the commit to prove reproducibility, and creates a lightweight
+   `vX.Y.Z` tag.
+3. Inspect the commit and tag, then push them atomically with
+   `git push --atomic origin main vX.Y.Z`.
+4. A read-only CI job builds, tests, packs, and inspects the package without publishing credentials.
+5. A separate credentialed job verifies the signed commit and exact package digest before attesting
+   and staging that archive through npm trusted publishing.
+6. Approve the staged package on npmjs.com or with `npm stage approve <stage-id>`.
+
+Stable versions use `latest`; prereleases derive a non-`latest` dist-tag such as `alpha`, `beta`, or
+`rc` from their first prerelease identifier.
