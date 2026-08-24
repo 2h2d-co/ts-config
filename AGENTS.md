@@ -1,10 +1,11 @@
 # Agent Instructions
 
 - This project is a TypeScript ESM package.
+- Keep `base.json` limited to portable compiler policy. Runtime targets, module resolvers, ambient
+  types, source selection, and path-bearing build settings belong in consuming projects.
 - Run `npm run check` and `npm test` before committing meaningful code changes.
 - Run `npm run pack:dry` to build and inspect the npm package contents before release.
 - Keep `.github/npm-package-files` synchronized with every intentional package-content change; local release validation and both CI jobs enforce it exactly.
-- Keep exports in `package.json` aligned with built files in `dist/`.
 - Use Conventional Commits and maintain `CHANGELOG.md` in Keep a Changelog style; add entries for `feat:` and `fix:` changes under `Unreleased`.
 - Keep changelog entries under `Unreleased` for prereleases and move them into a release section only for stable releases.
 - Use `npm run release -- <version>` to build the release package locally, create an SSH-signed `release: v<version>` commit containing its `Npm-Artifact-SHA256` trailer, verify a clean rebuild, and create the matching lightweight tag.

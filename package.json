@@ -17,22 +17,14 @@
     "url": "git+https://github.com/2h2d-co/ts-config.git"
   },
   "files": [
-    "dist",
-    "src",
+    "base.json",
     "README.md",
     "CHANGELOG.md",
     "LICENSE"
   ],
   "type": "module",
-  "types": "dist/index.d.ts",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
-    }
-  },
   "scripts": {
-    "build": "rm -rf dist && tsc -p tsconfig.build.json",
+    "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json",
     "test": "node --test --test-concurrency=1 test/*.test.ts",
     "check": "hk check --all --check",
@@ -48,6 +40,9 @@
     "oxfmt": "0.63.0",
     "oxlint": "1.78.0",
     "oxlint-tsgolint": "7.0.2001",
+    "typescript": "7.0.2"
+  },
+  "peerDependencies": {
     "typescript": "7.0.2"
   },
   "engines": {

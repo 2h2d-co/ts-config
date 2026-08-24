@@ -1,6 +1,64 @@
-# ts-config
+# @2h2d/ts-config
 
-Shared TypeScript compiler configuration for 2h2d repositories
+Shared TypeScript compiler policy for 2h2d repositories.
+
+## Install
+
+```bash
+npm install --save-dev --save-exact @2h2d/ts-config typescript@7.0.2
+```
+
+## Use
+
+Keep environment, source-selection, and build settings in the consuming project:
+
+```json
+{
+  "extends": "@2h2d/ts-config/base.json",
+  "compilerOptions": {
+    "module": "NodeNext",
+    "target": "ES2023",
+    "lib": ["ES2023"],
+    "types": ["node"],
+    "noEmit": true,
+    "skipLibCheck": true
+  },
+  "include": ["src", "test", "scripts", "oxlint.config.ts"]
+}
+```
+
+## Common policy
+
+`base.json` centralizes:
+
+- strict type checking, unchecked indexed-access protection, and exact optional properties;
+- explicit return, override, switch-fallthrough, index-signature, unreachable-code, and unused-label
+  checks;
+- erasable TypeScript syntax, isolated modules, verbatim module syntax, forced module detection, and
+  checked side-effect imports;
+- TypeScript-extension imports and relative import-extension rewriting;
+- casing consistency and prevention of JavaScript emission after a type error.
+
+See [`base.json`](base.json) for the authoritative settings.
+
+## Intentionally project-local settings
+
+The package does not prescribe:
+
+- runtime and resolver selection: `module`, `moduleResolution`, `target`, and `lib`;
+- ambient environments: `types`;
+- emission and library checking: `noEmit`, `skipLibCheck`, declarations, source maps, and output
+  paths;
+- source selection: `files`, `include`, `exclude`, and project references;
+- framework behavior: JSX, JSON modules, and path aliases;
+- unused local and parameter reporting.
+
+Relative paths in inherited TypeScript configurations resolve relative to the configuration that
+declares them. Keeping path-bearing settings in consumers avoids accidentally resolving them from
+this package inside `node_modules`.
+
+The current project inventory and adoption differences are recorded in
+[`PROJECT-SETTINGS.md`](PROJECT-SETTINGS.md).
 
 ## Development
 

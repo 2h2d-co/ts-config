@@ -1,7 +1,5 @@
 CHANGELOG.md
 LICENSE
 README.md
-dist/index.d.ts
-dist/index.js
+base.json
 package.json
-src/index.ts
