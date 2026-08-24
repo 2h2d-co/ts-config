@@ -58,7 +58,7 @@ declares them. Keeping path-bearing settings in consumers avoids accidentally re
 this package inside `node_modules`.
 
 The current project inventory and adoption differences are recorded in
-[`PROJECT-SETTINGS.md`](PROJECT-SETTINGS.md).
+[`PROJECT-SETTINGS.md`](https://github.com/2h2d-co/ts-config/blob/main/PROJECT-SETTINGS.md).
 
 ## Development
 

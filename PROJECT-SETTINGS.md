@@ -62,3 +62,26 @@ Two projects have effective changes to review before rollout:
 `skipLibCheck` remains local because `vscode-node-tests` intentionally uses `false` while the other
 reviewed roots use `true`. `noUnusedLocals` and `noUnusedParameters` remain local because only
 `vscode-node-tests` enables them.
+
+### Read-only adoption validation
+
+Both `vscode-node-tests` configurations pass with `moduleDetection: "force"` and
+`noUncheckedSideEffectImports`, so its adoption does not require source changes.
+
+All ten reviewed `pi-reviewer` configurations pass with their current settings. Testing each
+additional common option independently produced:
+
+| Added option                         | Diagnostic occurrences | Failing configs |
+| ------------------------------------ | ---------------------: | --------------: |
+| `erasableSyntaxOnly`                 |                     14 |               7 |
+| `exactOptionalPropertyTypes`         |                    967 |               8 |
+| `noImplicitOverride`                 |                     11 |               5 |
+| `noImplicitReturns`                  |                      6 |               4 |
+| `noPropertyAccessFromIndexSignature` |                  1,080 |               9 |
+| `noUncheckedIndexedAccess`           |                  1,739 |               8 |
+| `rewriteRelativeImportExtensions`    |                      0 |               0 |
+| `verbatimModuleSyntax`               |                    116 |               5 |
+
+The `pi-reviewer` configurations overlap heavily, so these are repeated diagnostic occurrences
+across configuration runs, not counts of unique source locations. The result still shows that
+`pi-reviewer` cannot adopt the complete common policy as a dependency-only migration.
