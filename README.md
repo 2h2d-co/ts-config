@@ -19,9 +19,7 @@ Keep environment, source-selection, and build settings in the consuming project:
     "module": "NodeNext",
     "target": "ES2023",
     "lib": ["ES2023"],
-    "types": ["node"],
-    "noEmit": true,
-    "skipLibCheck": true
+    "types": ["node"]
   },
   "include": ["src", "test", "scripts", "oxlint.config.ts"]
 }
@@ -37,7 +35,8 @@ Keep environment, source-selection, and build settings in the consuming project:
 - erasable TypeScript syntax, isolated modules, verbatim module syntax, forced module detection, and
   checked side-effect imports;
 - TypeScript-extension imports and relative import-extension rewriting;
-- casing consistency and prevention of JavaScript emission after a type error.
+- type-check-only operation by default, dependency declaration-file skipping, casing consistency,
+  and prevention of JavaScript emission after a type error.
 
 See [`base.json`](base.json) for the authoritative settings.
 
@@ -47,8 +46,8 @@ The package does not prescribe:
 
 - runtime and resolver selection: `module`, `moduleResolution`, `target`, and `lib`;
 - ambient environments: `types`;
-- emission and library checking: `noEmit`, `skipLibCheck`, declarations, source maps, and output
-  paths;
+- emitting-build details: declarations, source maps, output paths, and an explicit
+  `noEmit: false`;
 - source selection: `files`, `include`, `exclude`, and project references;
 - framework behavior: JSX, JSON modules, and path aliases;
 - unused local and parameter reporting.

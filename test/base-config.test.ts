@@ -16,13 +16,11 @@ const projectLocalCompilerOptions = [
   "lib",
   "module",
   "moduleResolution",
-  "noEmit",
   "noUnusedLocals",
   "noUnusedParameters",
   "outDir",
   "paths",
   "rootDir",
-  "skipLibCheck",
   "sourceMap",
   "target",
   "types",
@@ -61,7 +59,6 @@ test("TypeScript resolves the published package path and local overrides", async
         compilerOptions: {
           lib: ["ES2023"],
           module: "NodeNext",
-          noEmit: true,
           target: "ES2023",
           types: [],
         },
@@ -92,6 +89,8 @@ test("TypeScript resolves the published package path and local overrides", async
   assert.ok(isRecord(compilerOptions));
   assert.equal(compilerOptions["strict"], true);
   assert.equal(compilerOptions["erasableSyntaxOnly"], true);
+  assert.equal(compilerOptions["noEmit"], true);
+  assert.equal(compilerOptions["skipLibCheck"], true);
   assert.equal(compilerOptions["target"], "es2023");
   assert.equal(compilerOptions["module"], "nodenext");
 });

@@ -4,9 +4,7 @@
     "module": "nodenext",
     "target": "esnext",
     "lib": ["ESNext"],
-    "types": ["node"],
-    "noEmit": true,
-    "skipLibCheck": true
+    "types": ["node"]
   },
   "include": ["oxlint.config.ts", "scripts", "test"]
 }
