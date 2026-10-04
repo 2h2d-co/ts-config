@@ -62,9 +62,8 @@ The current project inventory and adoption differences are recorded in
 ## Development
 
 ```bash
-npm install
-npm run check
-npm test
+mise run init
+mise run check
 npm run build
 npm run pack:dry
 ```
